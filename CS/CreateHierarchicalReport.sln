@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateHierarchicalReportInCode", "CreateHierarchicalReport\CreateHierarchicalReportInCode.csproj", "{84A2095F-4151-4AA9-B2D7-C3250A4F8BDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateHierarchicalReportInCode", "CreateHierarchicalReportInCode.csproj", "{84A2095F-4151-4AA9-B2D7-C3250A4F8BDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {524C279A-6950-4E46-AED3-3F10F32E3DFE}
+		SolutionGuid = {72227586-8757-46C0-9E81-C632ADADB0D4}
 	EndGlobalSection
 EndGlobal
