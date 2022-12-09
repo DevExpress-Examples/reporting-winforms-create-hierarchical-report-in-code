@@ -68,7 +68,7 @@ Namespace CreateHierarchicalReportInCode
 			' Specify the child node offset
 			detailBand.HierarchyPrintOptions.Indent = 25
 
-			' Add an XRCheckBox control as the DetailBand's drill-down controll to allow end users to collapse and expand tree nodes
+			' Add an XRCheckBox control as the DetailBand's drill-down control to allow end users to collapse and expand tree nodes
 			Dim expandButton As New XRCheckBox() With {
 				.Name = "DrillDownCheckBox",
 				.ExpressionBindings = { New ExpressionBinding("Checked", "[ReportItems].[" & detailBand.Name & "].[DrillDownExpanded]") },

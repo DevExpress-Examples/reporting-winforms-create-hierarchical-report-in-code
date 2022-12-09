@@ -62,7 +62,7 @@ namespace CreateHierarchicalReportInCode {
             // Specify the child node offset
             detailBand.HierarchyPrintOptions.Indent = 25;
 
-            // Add an XRCheckBox control as the DetailBand's drill-down controll to allow end users to collapse and expand tree nodes
+            // Add an XRCheckBox control as the DetailBand's drill-down control to allow end users to collapse and expand tree nodes
             XRCheckBox expandButton = new XRCheckBox() {
                 Name = "DrillDownCheckBox",
                 ExpressionBindings = { new ExpressionBinding("Checked", "[ReportItems].[" + detailBand.Name + "].[DrillDownExpanded]") },
@@ -82,7 +82,7 @@ namespace CreateHierarchicalReportInCode {
                 ExpressionBindings = { new ExpressionBinding("Text", "[Region]") },
                 BoundsF = new RectangleF(25, 0, 450, 25),
                 TextAlignment = TextAlignment.MiddleLeft,
-                // Anchor the label to both the left and right edges of the DetailBand so that it fit the page's width
+                // Anchor the label to both the left and right edges of the DetailBand so that it fits the page's width
                 AnchorHorizontal = HorizontalAnchorStyles.Both
             };
             XRLabel AreaLabel = new XRLabel() {
