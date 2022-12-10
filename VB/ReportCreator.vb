@@ -6,25 +6,24 @@ Imports DevExpress.Utils.Svg
 Imports DevExpress.XtraPrinting
 Imports DevExpress.XtraPrinting.Drawing
 Imports DevExpress.XtraReports.UI
+Imports DevExpress.LookAndFeel.DXSkinColors
 
 Namespace CreateHierarchicalReportInCode
 	Public Class ReportCreator
 		Public Shared Function CreateHierarchicalReport() As XtraReport
-			Dim report As New XtraReport() With {
-				.DataSource = New CountryDataSource(),
-				.StyleSheet = {
-					New XRControlStyle() With {
-						.Name = "CaptionStyle",
-						.Font = New Font("Tahoma", 14F),
-						.BackColor = Color.Gray,
-						.ForeColor = Color.White
-					},
-					New XRControlStyle() With {
-						.Name = "EvenStyle",
-						.BackColor = Color.LightGray
-					}
+			Dim report As New XtraReport() With {.DataSource = New CountryDataSource()}
+			report.StyleSheet.AddRange( {
+				New XRControlStyle() With {
+					.Name = "CaptionStyle",
+					.Font = New Font("Tahoma", 14F),
+					.BackColor = Color.Gray,
+					.ForeColor = Color.White
+				},
+				New XRControlStyle() With {
+					.Name = "EvenStyle",
+					.BackColor = Color.LightGray
 				}
-			}
+			})
 			Dim pageHeaderBand = CreatePageHeader()
 			Dim detailBand = CreateDetail()
 			report.Bands.AddRange(New Band() { pageHeaderBand, detailBand })
@@ -58,10 +57,12 @@ Namespace CreateHierarchicalReportInCode
 				.HeightF = 25,
 				.EvenStyleName = "EvenStyle",
 				.Padding = New PaddingInfo(5, 5, 0, 0),
-				.Font = New Font("Tahoma", 9F),
-				.ExpressionBindings = { New ExpressionBinding("Font.Bold", "[DataSource.CurrentRowHierarchyLevel] == 0") },
-				.SortFields = { New GroupField("Region", XRColumnSortOrder.Ascending) }
+				.Font = New Font("Tahoma", 9F)
 			}
+			' Print root level nodes in bold
+			detailBand.ExpressionBindings.Add(New ExpressionBinding("Font.Bold", "[DataSource.CurrentRowHierarchyLevel] == 0"))
+			' Sort data on each hierarchy level by the Region field
+			detailBand.SortFields.Add(New GroupField("Region", XRColumnSortOrder.Ascending))
 			' Specify Id-ParentID related fields
 			detailBand.HierarchyPrintOptions.KeyFieldName = "RegionID"
 			detailBand.HierarchyPrintOptions.ParentFieldName = "ParentRegionID"
@@ -71,9 +72,9 @@ Namespace CreateHierarchicalReportInCode
 			' Add an XRCheckBox control as the DetailBand's drill-down control to allow end users to collapse and expand tree nodes
 			Dim expandButton As New XRCheckBox() With {
 				.Name = "DrillDownCheckBox",
-				.ExpressionBindings = { New ExpressionBinding("Checked", "[ReportItems].[" & detailBand.Name & "].[DrillDownExpanded]") },
 				.BoundsF = New RectangleF(0, 0, 25, 25)
 			}
+			expandButton.ExpressionBindings.Add(New ExpressionBinding("Checked", "[ReportItems].[" & detailBand.Name & "].[DrillDownExpanded]"))
 			Dim checkedSvg As SvgImage = SvgImage.FromResources("CreateHierarchicalReportInCode.Expanded.svg", GetType(ReportCreator).Assembly)
 			Dim uncheckedSvg As SvgImage = SvgImage.FromResources("CreateHierarchicalReportInCode.Collapsed.svg", GetType(ReportCreator).Assembly)
 			expandButton.GlyphOptions.Alignment = HorzAlignment.Center
@@ -85,19 +86,19 @@ Namespace CreateHierarchicalReportInCode
 
 			Dim regionLabel As New XRLabel() With {
 				.Name = "RegionLabel",
-				.ExpressionBindings = { New ExpressionBinding("Text", "[Region]") },
 				.BoundsF = New RectangleF(25, 0, 450, 25),
 				.TextAlignment = TextAlignment.MiddleLeft,
 				.AnchorHorizontal = HorizontalAnchorStyles.Both
 			}
+			regionLabel.ExpressionBindings.Add(New ExpressionBinding("Text", "[Region]"))
 			Dim AreaLabel As New XRLabel() With {
 				.Name = "AreaLabel",
-				.ExpressionBindings = { New ExpressionBinding("Text", "[Area]") },
 				.TextFormatString = "{0:N0}",
 				.BoundsF = New RectangleF(475, 0, 175, 25),
 				.TextAlignment = TextAlignment.MiddleRight,
 				.AnchorHorizontal = HorizontalAnchorStyles.Right
 			}
+			AreaLabel.ExpressionBindings.Add(New ExpressionBinding("Text", "[Area]"))
 			detailBand.Controls.AddRange(New XRControl() { expandButton, regionLabel, AreaLabel })
 			Return detailBand
 		End Function
