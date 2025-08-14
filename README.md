@@ -8,7 +8,6 @@
 
 ![Hierarchical Report](Images/HierarchicalReport.png)
 
-
 ## Implementation Details
 
 Do the following to create a hierarchical report in code:
@@ -34,9 +33,9 @@ Do the following to allow end users to expand and collapse tree nodes:
 1. Add the [XRCheckBox](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRCheckBox) control to the DetailBand at the left-most position.
 	In this example, the checkbox' [GlyphOptions](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRCheckBox.GlyphOptions) property is used to specify custom glyphs for the *checked* and *unchecked* states.
 	
-2. Set the DetailBand's [DrillDownControl](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.DetailBand.DrillDownControl) property to the added XRCheckBox control.
+2. Set the DetailBand's [DrillDownControl](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.DetailBand.DrillDownControl) property to the added `XRCheckBox` control.
 
-3. Set the XRCheckBox's [CheckState](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRCheckBox.CheckState) property to the following expression: [ReportItems].[Detail].[DrillDownExpanded] 
+3. Set the XRCheckBox's [CheckState](https://docs.devexpress.com/XtraReports/DevExpress.XtraReports.UI.XRCheckBox.CheckState) property to the following expression: `[ReportItems].[Detail].[DrillDownExpanded]`. 
 
 ### Sort Report Data
 
@@ -55,10 +54,12 @@ When the **CurrentRowHierarchyLevel** variable in [expressions](https://docs.dev
 
 ## Documentation
 
-- Create a Hierarchical Report](https://docs.devexpress.com/XtraReports/400925/create-popular-reports/create-a-hierarchical-report)
+- [Create a Hierarchical Report](https://docs.devexpress.com/XtraReports/400925/create-popular-reports/create-a-hierarchical-report)
 
 
+## More Examples
 
+- [Reporting for WinForms - How to create a hierarchical report based on data stored in a flat table](https://github.com/DevExpress-Examples/reporting-winforms-create-hierarchical-report-from-flat-table)
 
 
 
@@ -70,3 +71,4 @@ When the **CurrentRowHierarchyLevel** variable in [expressions](https://docs.dev
 
 (you will be redirected to DevExpress.com to submit your response)
 <!-- feedback end -->
+
